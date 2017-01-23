@@ -1,0 +1,319 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Rat Simulator</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="css/rats.css">
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="js/rats.json"></script>
+<script src="js/ratsim-min.js"></script>
+<script
+	src="http://cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.js"></script>
+</head>
+<body>
+	<br>
+	<table id="funcTable">
+		<tbody>
+			<tr>
+				<td style="float: right;"><a id="ratDetailLink" href="#"
+					style="float: right;">Show Detailed Rat List</a><br>
+					<form id="ratForm">
+						<label for="optionsCheckbox">Show Options</label><input
+							type="checkbox" value="Options" style="margin-right: 25px;"
+							id="optionsCheckbox" name="optionsCheckbox"> <label
+							for="ratSelect">Rat:</label> <select id="ratSelect"></select> <input
+							type="submit" value="Add!" id="ratAdd">
+					</form>
+				</td>
+			</tr>
+			<tr id="optionsRow" style="display: none;">
+				<td>
+					<form id="ratOptionsForm" style="float: right;">
+						<label for="enforceMealLimit"
+							title="Enforce the cap on max meals a rat can have at once (10, or 20 for two-headed rat)">Enforce
+							Meal Max?</label> <input type="checkbox" id="enforceMealLimit"> <br>
+						<label for="calcFoodCostCheckbox">Calculate Food Cost</label> <input
+							type="checkbox" id="calcFoodCostCheckbox"><br> <span
+							class="calcFoodCost" style="display: none;"> <label
+							for="calcFoodCostLevel">Level</label> <input type="text"
+							id="calcFoodCostLevel" maxlength="4" style="width: 50px"
+							value="100">
+						</span>
+					</form>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<br>
+
+	<table id="ratTable">
+		<thead>
+			<tr>
+				<td style="width: 95px; text-align: left;">Name</td>
+				<td>Level</td>
+				<td>Experience</td>
+				<td>Age</td>
+				<td>Life</td>
+				<td>Meals</td>
+				<td>Speed</td>
+				<td>Attack</td>
+				<td>Defense</td>
+				<td>Cheese</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr id="ratStatRow_master" class="statRow" style="display: none;">
+				<td style="text-align: left; font-weight: bold;" class="ratName"></td>
+				<td class="ratLevel">1</td>
+				<td class="ratExp"><span class="ratExpHas">0</span> / <span
+					class="ratExpLevel">30</span></td>
+				<td class="ratAge">1</td>
+				<td class="ratLife">50</td>
+				<td class="ratMeals">3</td>
+				<td class="ratSpd">9</td>
+				<td class="ratAtk">9</td>
+				<td class="ratDef">8</td>
+				<td class="ratCheese">1</td>
+			</tr>
+			<tr id="ratRow_master" style="display: none; vertical-align: top;"
+				class="ratRow">
+				<td class="ratImg" style="background-color: white;">
+					<div style="position: relative; width: 120px; height: 80px;"></div>
+				</td>
+				<td colspan="7"><span class="ratLog" style="display: none;"></span>
+					<ul class="ratAbility">
+						<li>Critical hit increases rat damage by 50%</li>
+					</ul>
+					<ul style="display: none;" class="foodList">
+						<li><a href="#" class="food0">0T food</a> (+1 exp, +11 life)<span
+							class="foodFeedAll"><a href="#" class="foodFeedAllLink food0">Feed
+									x3</a> </span> <span class="foodCheckbox"><small>Auto-feed</small>
+								<input type="checkbox"> </span></li>
+						<li><a href="#" class="food1">1T food</a> (+3 exp, +10 life)<span
+							class="foodFeedAll"><a href="#" class="foodFeedAllLink food1">Feed
+									x3</a> </span> <span class="foodCheckbox"><small>Auto-feed</small>
+								<input type="checkbox"> </span></li>
+						<li><a href="#" class="food2">2-4T food</a> (+5 exp, +9 life)<span
+							class="foodFeedAll"><a href="#" class="foodFeedAllLink food2">Feed
+									x3</a> </span> <span class="foodCheckbox"><small>Auto-feed</small>
+								<input type="checkbox"> </span></li>
+						<li><a href="#" class="food3">5-9T food</a> (+7 exp, +8 life)<span
+							class="foodFeedAll"><a href="#" class="foodFeedAllLink food3">Feed
+									x3</a> </span> <span class="foodCheckbox"><small>Auto-feed</small>
+								<input type="checkbox"> </span></li>
+						<li><a href="#" class="food4">10-15T food</a> (+9 exp, +7 life)<span
+							class="foodFeedAll"><a href="#" class="foodFeedAllLink food4">Feed
+									x3</a> </span> <span class="foodCheckbox"><small>Auto-feed</small>
+								<input type="checkbox"> </span></li>
+						<li><a href="#" class="food5">16-25T food</a> (+11 exp, +6 life)<span
+							class="foodFeedAll"><a href="#" class="foodFeedAllLink food5">Feed
+									x3</a> </span> <span class="foodCheckbox"><small>Auto-feed</small>
+								<input type="checkbox"> </span></li>
+						<li><a href="#" class="food6">26-49T food</a> (+13 exp, +5 life)<span
+							class="foodFeedAll"><a href="#" class="foodFeedAllLink food6">Feed
+									x3</a> </span> <span class="foodCheckbox"><small>Auto-feed</small>
+								<input type="checkbox"> </span></li>
+						<li><a href="#" class="food7">50-99T food</a> (+17 exp, +3 life)<span
+							class="foodFeedAll"><a href="#" class="foodFeedAllLink food7">Feed
+									x3</a> </span> <span class="foodCheckbox"><small>Auto-feed</small>
+								<input type="checkbox"> </span></li>
+						<li><a href="#" class="food8">100T+ food</a> (+21 exp, +1 life)<span
+							class="foodFeedAll"><a href="#" class="foodFeedAllLink food8">Feed
+									x3</a> </span> <span class="foodCheckbox"><small>Auto-feed</small>
+								<input type="checkbox"> </span></li>
+					</ul>
+					<ul style="display: none;" class="foodList">
+						<li><a href="#" class="furlong">Furlong</a> (+17 exp, -7 life)<span
+							class="foodFeedAll"><a href="#" class="foodFeedAllLink furlong">Feed
+									x3</a> </span> <span class="foodCheckbox"><small>Auto-feed</small>
+								<input type="checkbox"> </span></li>
+					</ul>
+					
+					<ul style="display: none;" class="foodVegList">
+						<li><a href="#" class="food0">0T food</a> (+2 exp, +12 life)<span
+							class="foodFeedAll"><a href="#" class="foodFeedAllLink food0">Feed
+									x3</a> </span> <span class="foodCheckbox"><small>Auto-feed</small>
+								<input type="checkbox"> </span></li>
+						<li><a href="#" class="food1">1T food</a> (+4 exp, +11 life)<span
+							class="foodFeedAll"><a href="#" class="foodFeedAllLink food1">Feed
+									x3</a> </span> <span class="foodCheckbox"><small>Auto-feed</small>
+								<input type="checkbox"> </span></li>
+						<li><a href="#" class="food2">2-4T food</a> (+6 exp, +10 life)<span
+							class="foodFeedAll"><a href="#" class="foodFeedAllLink food2">Feed
+									x3</a> </span> <span class="foodCheckbox"><small>Auto-feed</small>
+								<input type="checkbox"> </span></li>
+						<li><a href="#" class="food3">5-9T food</a> (+8 exp, +9 life)<span
+							class="foodFeedAll"><a href="#" class="foodFeedAllLink food3">Feed
+									x3</a> </span> <span class="foodCheckbox"><small>Auto-feed</small>
+								<input type="checkbox"> </span></li>
+						<li><a href="#" class="food4">10-15T food</a> (+10 exp, +8 life)<span
+							class="foodFeedAll"><a href="#" class="foodFeedAllLink food4">Feed
+									x3</a> </span> <span class="foodCheckbox"><small>Auto-feed</small>
+								<input type="checkbox"> </span></li>
+						<li><a href="#" class="food5">16-25T food</a> (+12 exp, +7 life)<span
+							class="foodFeedAll"><a href="#" class="foodFeedAllLink food5">Feed
+									x3</a> </span> <span class="foodCheckbox"><small>Auto-feed</small>
+								<input type="checkbox"> </span></li>
+						<li><a href="#" class="food6">26-49T food</a> (+14 exp, +6 life)<span
+							class="foodFeedAll"><a href="#" class="foodFeedAllLink food6">Feed
+									x3</a> </span> <span class="foodCheckbox"><small>Auto-feed</small>
+								<input type="checkbox"> </span></li>
+						<li><a href="#" class="food7">50-99T food</a> (+18 exp, +4 life)<span
+							class="foodFeedAll"><a href="#" class="foodFeedAllLink food7">Feed
+									x3</a> </span> <span class="foodCheckbox"><small>Auto-feed</small>
+								<input type="checkbox"> </span></li>
+						<li><a href="#" class="food8">100T+ food</a> (+22 exp, +2 life)<span
+							class="foodFeedAll"><a href="#" class="foodFeedAllLink food8">Feed
+									x3</a> </span> <span class="foodCheckbox"><small>Auto-feed</small>
+								<input type="checkbox"> </span></li>
+					</ul>
+					<ul style="display: none;" class="foodVegList">
+						<li><a href="#" class="furlong">Furlong</a> (+18 exp, -6 life)<span
+							class="foodFeedAll"><a href="#" class="foodFeedAllLink furlong">Feed
+									x3</a> </span> <span class="foodCheckbox"><small>Auto-feed</small>
+								<input type="checkbox"> </span></li>
+					</ul>
+					<ul style="display: none;" class="upgradeList">
+						<li class="upgradeSpd">Speed: <span class="upgradeCount">0</span>
+							<a href="#" class="upgradeSpdLink">[Cost: <b class="cheeseCost">1</b>
+								cheese, $<b class="cashCost">10000</b>]
+						</a>
+						</li>
+						<li class="upgradeAtk">Attack: <span class="upgradeCount">0</span>
+							<a href="#" class="upgradeAtkLink">[Cost: <b class="cheeseCost">1</b>
+								cheese, $<b class="cashCost">10000</b>]
+						</a>
+						</li>
+						<li class="upgradeDef">Defense: <span class="upgradeCount">0</span>
+							<a href="#" class="upgradeDefLink">[Cost: <b class="cheeseCost">1</b>
+								cheese, $<b class="cashCost">10000</b>]
+						</a>
+						</li>
+						<li class="upgradeLife">Life: <span class="upgradeCount">0</span>
+							<a href="#" class="upgradeLifeLink">[Cost: <b class="cheeseCost">1</b>
+								cheese, $<b class="cashCost">10000</b>]
+						</a>
+						</li>
+						<li class="upgradeMeals">Meals: <span class="upgradeCount">0</span>
+							<a href="#" class="upgradeMealsLink">[Cost: <b class="cheeseCost">1</b>
+								cheese, $<b class="cashCost">10000</b>]
+						</a>
+						</li>
+						<li class="upgradeBuddhism">Buddhism: <a style="display: none;"
+							href="#" class="upgradeBuddhismLink">Cost: [<b class="cheeseCost">4</b>
+								cheese]
+						</a> <span class="upgradeDisabled"><span
+								style="text-decoration: line-through;">Cost: [4 cheese]</span> </span>
+						</li>
+						<li class="upgradeVeg">Vegetarianism: <a style="display: none;"
+							href="#" class="upgradeVegLink">Cost: [<b class="cheeseCost">4</b>
+								cheese]
+						</a> <span class="upgradeDisabled"><span
+								style="text-decoration: line-through;">Cost: [4 cheese]</span> </span>
+						</li>
+					</ul></td>
+				<td colspan="2" style="text-align: center;">
+					<ul class="ratOpts">
+						<li>[<a href="#" class="feedLink">Feed</a>]
+						</li>
+						<li>[<a href="#" class="upgradeLink">Upgrade</a>]
+						</li>
+						<li>[<a href="#" class="fastForwardLink">Advance Time</a>]
+						</li>
+					</ul> <br>
+					<ul class="ratOptsPerm">
+						<li>[<a href="#" class="abandonLink" style="color: red;">Abandon</a>]
+						</li>
+					</ul>
+					<ul class="ratOptsPerm">
+						<li><a href="#" class="showRatLogLink">Toggle Log</a></li>
+						<li><a href="#" class="showStatGraph">Make Stats/Age Chart</a></li>
+
+					</ul>
+					<ul class="ratOptsPerm">
+						<li class="cashSpentFood" style="display: none;">Food Cost: ~$<span
+							class="cashSpentFood">0</span>
+						</li>
+						<li class="cashSpentUpgrades" style="display: none;">Upgrades
+							Cost: $<span class="cashSpentUpgrades">0</span>
+						</li>
+						<li class="cashSpentTotal">Cash spent: $<span class="cashSpent">0</span>
+						</li>
+					</ul>
+				</td>
+			</tr>
+			<tr class="ratLogRow" id="ratLog_master" style="display: none;">
+				<td colspan="10" class="ratLogCell"><textarea class="ratLogArea"
+						style="box-sizing: border-box; width: 100%;"></textarea>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<br>
+	<small><a href="#" style="margin-left: 100px; display: none;"
+		class="hideGraphLink">Remove Chart</a> </small>
+
+	<canvas id="chart" height="500" width="700" style="margin-left: auto; margin-right: auto; padding-left: 0; padding-right: 0; display: none;"></canvas>
+	<br>
+	<table id="ratDetailTable" style="display: none;">
+		<thead>
+			<tr>
+				<th>Type</th>
+				<th>Ability</th>
+				<th>Location</th>
+				<th class="sort_num">Life</th>
+				<th class="sort_num">Spd</th>
+				<th class="sort_num">Atk</th>
+				<th class="sort_num">Def</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+
+			</tr>
+		</tbody>
+	</table>
+	<br>
+	<br>
+	<br>
+	<div id="news"
+		style="margin-right: 30px; margin-left: 30px; width: 70%; font-size: 9pt">
+		<b>May 06</b> - Added lab rat, pincher rat, country rat, boxing rat<br>
+		<b>May 08</b> - Added auto-feed option<br> <b>May 09</b> - Fixed
+		display issue with multiple rats, updated abilities, added shadow rat<br>
+		<b>May 10</b> - Initial code re-write, validated html <br> <b>May 11</b>
+		- Moved options around, started food cost estimation, forces fighters
+		lunches @ &gt;15T (more functionally needed), but compares cost of
+		apples, wonka bars, chocolate ice cream, selecting the cheapest, and
+		if your rat isn't vegetarian, chicken legs. Price is calculated from
+		level provided. Added more detail when rat dies.<br> <b>May 12</b> -
+		Added Breakdancing Rat, Gumshoe Rat. On rat's death, upgrade list is
+		copied to cell. Fixed cheese cost in log displaying incorrectly.<br> <b>May
+			15</b> - Added detailed, sortable rat info table. <br> <b>May 30</b>
+		- Started chart functions - only total battle stats/age at the moment
+		<br> <b>May 31</b> - Switched chart libraries (GoogleChart -&gt;
+		Chartjs)<br> <b>Jun 02</b> - Fixed two-headed rat meal issue. <br> <b>Jun
+			06</b> - Changed gains given by with veg. upgrade to align with
+		latest rat update.  Stretched chart.<br> <b> Jan 02</b> - Updated Shadow Rat's picture.
+	</div>
+	<br>
+	<br>
+	<div id="more" style="text-align: center;">
+		Download <a href="js/rats.json">Rats JSON file</a> / <a
+			href="js/ratsim.js"> source (full)</a>
+	</div>
+	<br>
+	<div id="author" style="text-align: center;">
+		Please send feature requests, missing/updated rat info, or bug reports
+		to <a
+			href="http://www.hobowars.com/game/game.php?cmd=player&amp;ID=2737487">roof</a>.
+		<small>(or to <a
+			href="http://www.hobowars2.com/game/game.php?cmd=player&amp;ID=147195">roof@hw2</a>)
+		</small>
+		<!-- and your money/nekkid pictures. -->
+	</div>
+
+</body>
+<?php include_once('../site-stats.php'); ?>
+</html>

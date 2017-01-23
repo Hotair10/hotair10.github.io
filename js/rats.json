@@ -1,0 +1,462 @@
+var rats = {
+  "Alcoholic Rat": {
+    "Stats": [
+      50,
+      9,
+      9,
+      8
+    ],
+    "Ability": [
+      {
+        "Type": "Fetch",
+        "Description": "Randomly brings booze back to the nest"
+      },
+      {
+        "Type": "Battle",
+        "Description": "Increases opponent's Blood Alcohol by 0.01% for the current fight"
+      },
+      {
+        "Type": "Hidden",
+        "Description": "Chance to gain +3 xp, +1 life exploring more jungle with no berries"
+      },
+      {
+        "Type": "Hidden",
+        "Description": "Chance to find a half empty beer can while exploring beeramid\/hoburbs (+1 exp, +3 life)"
+      }
+    ],
+    "Image": "alcoholic-120.jpg",
+    "Location": [
+      "Drink a Fotey (found sailing)"
+    ]
+  },
+  "Ballerina Rat": {
+    "Stats": [
+      80,
+      16,
+      9,
+      6
+    ],
+    "Ability": [
+      {
+        "Type": "Battle",
+        "Description": "1\/2 chance to charm enemy rat"
+      }
+    ],
+    "Image": "ballerina-120.jpg",
+    "Location": [
+      "Bernards Basement",
+      "Knocking on City Hall windows w\/ rat poison"
+    ]
+  },
+  "Boxing Rat": {
+    "Stats": [
+      100,
+      14,
+      20,
+      8
+    ],
+    "Ability": [
+      {
+        "Type": "Battle",
+        "Description": "Critical hit increases rat damage by 200%"
+      }
+    ],
+    "Image": "boxer-120.jpg",
+    "Location": [
+      "Bernards Basement"
+    ]
+  },
+  "Breakdancing Rat": {
+    "Stats": [
+      90,
+      17,
+      10,
+      5
+    ],
+    "Ability": [
+      {
+        "Type": "Battle",
+        "Description": "Boosts your speed by 3%"
+      }
+    ],
+    "Image": "breakdance-120.jpg",
+    "Location": [
+      "Dance floor, Nightclub"
+    ]
+  },
+  "Cave Rat": {
+    "Stats": [
+      90,
+      10,
+      13,
+      12
+    ],
+    "Ability": [
+      {
+        "Type": "Hidden",
+        "Description": "Chance to prevent cave-in while mining"
+      },
+      {
+        "Type": "Hidden",
+        "Description": "Chance to find cave cheese (+2 xp,+2 life) while mining"
+      },
+      {
+        "Type": "Battle",
+        "Description": "Critical hit increases rat damage by 50%"
+      }
+    ],
+    "Image": "cave-120.jpg",
+    "Location": [
+      "Pet Shop Wheel",
+      "Bernards Basement"
+    ]
+  },
+  "Country Rat": {
+    "Stats": [
+      100,
+      13,
+      15,
+      10
+    ],
+    "Ability": [
+      {
+        "Type": "Fetch",
+        "Description": "Randomly brings whiskey back to the nest."
+      },
+      {
+        "Type": "Battle",
+        "Description": "Critical hit triples rat damage"
+      }
+    ],
+    "Image": "country-120.jpg",
+    "Location": [
+      "Bernards Basement"
+    ]
+  },
+  "Disco Rat": {
+    "Stats": [
+      90,
+      15,
+      11,
+      10
+    ],
+    "Ability": [
+      {
+        "Type": "Battle",
+        "Description": "Disco Inferno increases rat damage by 150%, has 1\/8 chance to set enemy on fire."
+      },
+      {
+        "Type": "Hidden",
+        "Description": "Chance to bust some moves on the dance floor at the night club (+2 exp, +2 life)"
+      }
+    ],
+    "Image": "disco-120.jpg",
+    "Location": [
+      "Dance floor, Nightclub"
+    ]
+  },
+  "Golden Rat": {
+    "Stats": [
+      160,
+      18,
+      18,
+      18
+    ],
+    "Ability": [
+      {
+        "Type": "Battle",
+        "Description": "1\/6 chance to blind enemy"
+      }
+    ],
+    "Image": "golden-120.jpg",
+    "Location": [
+      "In-N-Out",
+      "Wish"
+    ]
+  },
+  "Gumshoe Rat": {
+    "Stats": [
+      110,
+      11,
+      8,
+      9
+    ],
+    "Ability": [
+      {
+        "Type": "Fetch",
+        "Description": "Randomly brings candy cigarettes back to the nest. Frequency increases with level."
+      }
+    ],
+    "Image": "detective-120.jpg",
+    "Location": [
+      "Bernards Basement",
+      "Red Light District (outer wall)"
+    ]
+  },
+  "Lab Rat": {
+    "Stats": [
+      110,
+      8,
+      10,
+      9
+    ],
+    "Ability": [
+      {
+        "Type": "Battle",
+        "Description": "Buffs one of your stats randomly by 4%, or debuffs random enemy stat by 4%"
+      }
+    ],
+    "Image": "Lab-rat.jpg",
+    "Location": [
+      "Haunted House"
+    ]
+  },
+  "Obese Rat": {
+    "Stats": [
+      60,
+      6,
+      10,
+      15
+    ],
+    "Ability": [
+      {
+        "Type": "Fetch",
+        "Description": "Randomly brings food back to the nest. Occasionally discovers extra stomach space as well."
+      }
+    ],
+    "Image": "blob-120.jpg",
+    "Location": [
+      "Improved Dumpster (Rummage)"
+    ]
+  },
+  "Octo Rat": {
+    "Stats": [
+      80,
+      10,
+      10,
+      10
+    ],
+    "Ability": [
+      {
+        "Type": "Battle",
+        "Description": "Critical hit increases rat damage by 350%"
+      }
+    ],
+    "Image": "octo-120.jpg",
+    "Location": [
+      "Bernards Basement"
+    ]
+  },
+  "Old Rat": {
+    "Stats": [
+      30,
+      5,
+      7,
+      6
+    ],
+    "Ability": [
+      {
+        "Type": "Fetch",
+        "Description": "Small chance to bring smart bread back to the nest. Increases as Old Rat levels."
+      }
+    ],
+    "Image": "old-120.jpg",
+    "Location": [
+      "Nursing Home (Wonka Bar redemption)"
+    ]
+  },
+  "Pincher Rat": {
+    "Stats": [
+      122,
+      13,
+      19,
+      19
+    ],
+    "Ability": [
+      {
+        "Type": "Fetch",
+        "Description": "Brings random seafood back to the nest. Seafood improves with rat level."
+      },
+      {
+        "Type": "Battle",
+        "Description": "Critical hit increases rat damage by 250%"
+      }
+    ],
+    "Image": "pincher-120.jpg",
+    "Location": [
+      "Fizzy Falling Soda Room"
+    ]
+  },
+  "Pirate Rat": {
+    "Stats": [
+      110,
+      15,
+      17,
+      15
+    ],
+    "Ability": [
+      {
+        "Type": "Fetch",
+        "Description": "Brings random treasure back to the nest. Treasure improves with rat level."
+      }
+    ],
+    "Image": "pirate-120.jpg",
+    "Location": [
+      "Sailing"
+    ]
+  },
+  "Rat Bandit": {
+    "Stats": [
+      60,
+      15,
+      8,
+      7
+    ],
+    "Ability": [
+      {
+        "Type": "Battle",
+        "Description": "1\/5 chance to steal money while fighting. Amount increases as Rat Bandit levels. Stolen cash from fights is placed in bank."
+      },
+      {
+        "Type": "Other",
+        "Description": "1\/5 chance to steal money while begging. Amount increases as Rat Bandit levels."
+      },
+      {
+        "Type": "Hidden",
+        "Description": "Chance to find rat kibble while exploring sewers (+1 exp, +2life)"
+      }
+    ],
+    "Image": "bandit-120.jpg",
+    "Location": [
+      "Bernards Basement",
+      "Red Light District (outer wall)"
+    ]
+  },
+  "Raver Rat": {
+    "Stats": [
+      100,
+      14,
+      9,
+      9
+    ],
+    "Ability": [
+      {
+        "Type": "Battle",
+        "Description": "Buffs your power and strength by 1.5%"
+      },
+      {
+        "Type": "Hidden",
+        "Description": "Chance to bust some moves on the dance floor at the night club (+2 exp, +2 life)"
+      }
+    ],
+    "Image": "glow-120.jpg",
+    "Location": [
+      "Bernards Basement",
+      "Pet Shop Wheel",
+      "Dance Floor, Nightclub"
+    ]
+  },
+  "Rollerderby Rat": {
+    "Stats": [
+      80,
+      19,
+      13,
+      8
+    ],
+    "Ability": [
+      {
+        "Type": "Battle",
+        "Description": "Buffs your speed by 2%"
+      }
+    ],
+    "Image": "rollerderby-120.jpg",
+    "Location": [
+      "Knocking on City Hall windows w\/ rat poison"
+    ]
+  },
+  "Shadow Rat": {
+    "Stats": [
+      90,
+      16,
+      14,
+      16
+    ],
+    "Ability": [
+      {
+        "Type": "Battle",
+        "Description": "1\/3 chance to help you leap away from next enemy attack"
+      },
+      {
+        "Type": "Hidden",
+        "Description": "Chance to find rat kibble while exploring sewers (+1 exp, +2life)"
+      }
+    ],
+    "Image": "shadow-120.jpg",
+    "Location": [
+      "Bernards Basement"
+    ]
+  },
+  "Space Rat": {
+    "Stats": [
+      140,
+      16,
+      16,
+      16
+    ],
+    "Ability": [
+      {
+        "Type": "Fetch",
+        "Description": "Randomly brings dippin dots back to the nest."
+      },
+      {
+        "Type": "Battle",
+        "Description": "Brings down a tiny rat meteor that damages enemy for 2% of their max life"
+      },
+      {
+        "Type": "Hidden",
+        "Description": "Chance to find rat kibble while exploring sewers (+1 exp, +2life)"
+      }
+    ],
+    "Image": "space-120.jpg",
+    "Location": [
+      "Sewer #4 w\/ Mirror Shard"
+    ]
+  },
+  "Two Headed Rat": {
+    "Stats": [
+      60,
+      10,
+      11,
+      10
+    ],
+    "Ability": [
+      {
+        "Type": "Other",
+        "Description": "Gets an extra meal every 6 hours, max meal hunger is 20 instead of 10"
+      }
+    ],
+    "Image": "twoheaded-120.jpg",
+    "Location": [
+      "Pet Shop Wheel",
+      "Bernards Basement"
+    ]
+  },
+  "Winged Rat": {
+    "Stats": [
+      170,
+      13,
+      9,
+      7
+    ],
+    "Ability": [
+      {
+        "Type": "Battle",
+        "Description": "Stops to take a poop in battle (chance for opponent to slip)"
+      }
+    ],
+    "Image": "winged-120.jpg",
+    "Location": [
+      "Park"
+    ]
+  }
+};

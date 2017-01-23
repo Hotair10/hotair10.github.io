@@ -1,0 +1,123 @@
+body,html {
+	color: #000;
+	font-family: Verdana;
+	font-size: 10pt;
+	margin: 0;
+	padding: 0;
+}
+
+#ratDetailTable {
+	border-spacing: 1px;
+	border-style: none;
+	font-family: Verdana;
+	font-size: 10pt;
+	margin-left: 10%;
+	margin-right: 10%;
+	width: 80%;
+}
+
+#ratDetailTable .abilityType {
+	float: left;
+	font-size: 9pt;
+	font-style: italic;
+	font-weight: bold;
+	margin-right: 10px;
+}
+
+#ratDetailTable tbody tr td,#ratDetailTable thead tr th {
+	text-align: left;
+}
+
+#ratDetailTable tbody tr td.sort_num,#ratDetailTable thead tr th.sort_num
+	{
+	text-align: right;
+}
+
+#ratTable,#funcTable {
+	border-spacing: 2px;
+	border-style: none;
+	font-family: Verdana;
+	font-size: 10pt;
+	margin-left: 10%;
+	margin-right: 10%;
+	width: 80%;
+}
+
+#ratTable thead tr td,#ratTable tbody tr td,#funcTable tbody tr td {
+	padding: 3px;
+}
+
+#ratTable thead tr td {
+	font-weight: 700;
+	text-align: center;
+}
+
+#ratTable tbody tr.statRow {
+	background-color: #EAEAEA;
+}
+
+.foodDisabled,.upgradeDisabled {
+	text-decoration: line-through;
+}
+
+a {
+	text-decoration: none;
+}
+
+a img {
+	border: 0;
+	text-decoration: none;
+}
+
+A:hover {
+	color: red;
+	font-family: Verdana;
+}
+
+ul {
+	margin-left: 10px;
+	margin-top: 0;
+	padding-left: 10px;
+	padding-top: 0;
+}
+
+.upgImg {
+	position: relative;
+	top: -81px;
+	width: 18px;
+}
+
+a:link,a:visited {
+	color: #00F;
+	font-family: Verdana;
+}
+
+textarea,li {
+	font-family: Verdana;
+	font-size: 10pt;
+}
+
+.ratOpts,.ratOptsPerm {
+	list-style: none;
+}
+
+.ratOpts li,.ratOptsPerm li {
+	padding-bottom: 2px;
+}
+
+#ratTable tbody tr.statRow td,#ratMaker {
+	text-align: center;
+}
+
+a.foodFeedAllLink,.foodCheckbox {
+	margin-left: 8px;
+	margin-right: 8px;
+}
+
+#ratDetailTable thead tr,#ratTable thead tr {
+	background-color: #DDD;
+}
+
+#ratDetailTable tbody tr,#funcTable tbody tr,#ratTable tbody tr.ratRow {
+	background-color: #EEE;
+}
